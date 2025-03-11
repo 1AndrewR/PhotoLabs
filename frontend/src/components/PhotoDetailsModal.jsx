@@ -5,14 +5,14 @@ const PhotoDetailsModal = ({ photo, closeModal }) => (
   <div className="photo-details-modal" onClick={closeModal}>
     <div
       className="photo-details-modal__content"
-      onClick={(e) => e.stopPropagation()}
+      onClick={(e) => e.stopPropagation()} // Prevents modal from closing when clicking inside the content
     >
       <button
-        className="photo-details-modal__close-button"
         onClick={closeModal}
+        className="photo-details-modal__close-button"
         aria-label="Close modal"
       >
-        &times;
+        <img src="/close-symbol.png" alt="close symbol" />
       </button>
       <p>Modal content goes here</p>
     </div>
