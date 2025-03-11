@@ -13,7 +13,7 @@ const sampleDataForPhotoListItem = {
     regular: "/Image-1-Regular.jpeg",
   },
   user: {
-    username: "example user",
+    username: "exampleuser",
     name: "Joe Example",
     profile: "/profile-1.jpg",
   },
