@@ -7,9 +7,7 @@ const HomeRoute = ({ photos, topics }) => {
   return (
     <div className="home-route">
       <TopNavigationBar topics={topics} />
-      <main className="home-route__photos">
-        <PhotoList photos={photos} />
-      </main>
+      <PhotoList photos={photos} />
     </div>
   );
 };
