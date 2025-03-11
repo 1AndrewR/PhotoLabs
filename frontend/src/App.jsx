@@ -15,7 +15,6 @@ const App = () => {
       username: photo.user.username,
       location: photo.location,
     };
-    console.log('Photo details passed to modal:', photoDetails); // Print relevant details
     setSelectedPhoto(photoDetails);
     setIsModalOpen(true);
   };
@@ -29,7 +28,11 @@ const App = () => {
     <div className="App">
       <HomeRoute photos={photos} openModal={openModal} />
       {isModalOpen && (
-        <PhotoDetailsModal photo={selectedPhoto} closeModal={closeModal} />
+        <PhotoDetailsModal
+          photo={selectedPhoto}
+          similarPhotos={photos.filter((p) => p.id !== selectedPhoto.id)} // Example: excluding the selected photo
+          closeModal={closeModal}
+        />
       )}
     </div>
   );
