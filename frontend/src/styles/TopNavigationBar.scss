@@ -15,26 +15,6 @@
   &__topics {
     flex: 1;
     margin-left: 2rem;
-
-    &__topic-list {
-      list-style: none;
-      display: flex;
-      gap: 1rem;
-      margin: 0;
-      padding: 0;
-    }
-
-    &__topic {
-      padding: 0.5rem 1rem;
-      background-color: #f0f0f0;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-
-      &:hover {
-        background-color: #dcdcdc;
-      }
-    }
   }
 
   &__badge {
@@ -43,8 +23,19 @@
     gap: 0.5rem;
 
     &__fav-icon {
+      position: relative;
       color: red;
-      font-size: 1.2rem;
+      font-size: 1.5rem;
+    }
+
+    &__notification-dot {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      width: 10px;
+      height: 10px;
+      background-color: red;
+      border-radius: 50%;
     }
 
     &__fav-count {

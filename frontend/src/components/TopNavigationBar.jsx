@@ -9,7 +9,10 @@ const TopNavigationBar = ({ topics, favourites }) => (
       <TopicList topics={topics} />
     </nav>
     <div className="top-nav-bar__badge">
-      <span className="top-nav-bar__fav-icon">♥</span>
+      <span className="top-nav-bar__fav-icon">
+        ♥
+        {favourites.length > 0 && <span className="top-nav-bar__notification-dot"></span>}
+      </span>
       <span className="top-nav-bar__fav-count">{favourites.length}</span>
     </div>
   </div>

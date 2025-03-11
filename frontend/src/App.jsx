@@ -10,8 +10,8 @@ const App = () => {
   const toggleFavourite = (photoId) => {
     setFavourites((prevFavourites) =>
       prevFavourites.includes(photoId)
-        ? prevFavourites.filter((id) => id !== photoId) // Remove if already favourited
-        : [...prevFavourites, photoId] // Add if not yet favourited
+        ? prevFavourites.filter((id) => id !== photoId)
+        : [...prevFavourites, photoId]
     );
   };
 
