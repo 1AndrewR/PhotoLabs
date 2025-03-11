@@ -23,7 +23,6 @@ const App = () => {
     <div className="App">
       <HomeRoute
         photos={photos}
-        topics={topics}
         openModal={openModal}
       />
       {isModalOpen && (
