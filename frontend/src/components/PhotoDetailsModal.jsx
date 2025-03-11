@@ -1,22 +1,26 @@
 import React from 'react';
 import '../styles/PhotoDetailsModal.scss';
 
-const PhotoDetailsModal = ({ photo, closeModal }) => (
-  <div className="photo-details-modal" onClick={closeModal}>
-    <div
-      className="photo-details-modal__content"
-      onClick={(e) => e.stopPropagation()} // Prevents modal from closing when clicking inside the content
-    >
-      <button
-        onClick={closeModal}
-        className="photo-details-modal__close-button"
-        aria-label="Close modal"
+const PhotoDetailsModal = ({ photo, closeModal }) => {
+  console.log('Photo details received in modal:', photo); // Log photo details to the console
+
+  return (
+    <div className="photo-details-modal" onClick={closeModal}>
+      <div
+        className="photo-details-modal__content"
+        onClick={(e) => e.stopPropagation()}
       >
-        <img src="/close-symbol.png" alt="close symbol" />
-      </button>
-      <p>Modal content goes here</p>
+        <button
+          className="photo-details-modal__close-button"
+          onClick={closeModal}
+          aria-label="Close modal"
+        >
+          &times;
+        </button>
+        <p>Modal content goes here</p>
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 export default PhotoDetailsModal;

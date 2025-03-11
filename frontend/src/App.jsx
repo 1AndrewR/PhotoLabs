@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import HomeRoute from './components/HomeRoute';
 import PhotoDetailsModal from './routes/PhotoDetailsModal';
 import photos from './mocks/photos';
-import topics from './mocks/topics';
 import './App.scss';
 
 const App = () => {
@@ -10,7 +9,14 @@ const App = () => {
   const [selectedPhoto, setSelectedPhoto] = useState(null);
 
   const openModal = (photo) => {
-    setSelectedPhoto(photo);
+    const photoDetails = {
+      id: photo.id,
+      url: photo.urls.full,
+      username: photo.user.username,
+      location: photo.location,
+    };
+    console.log('Photo details passed to modal:', photoDetails); // Print relevant details
+    setSelectedPhoto(photoDetails);
     setIsModalOpen(true);
   };
 
@@ -21,15 +27,9 @@ const App = () => {
 
   return (
     <div className="App">
-      <HomeRoute
-        photos={photos}
-        openModal={openModal}
-      />
+      <HomeRoute photos={photos} openModal={openModal} />
       {isModalOpen && (
-        <PhotoDetailsModal
-          photo={selectedPhoto}
-          closeModal={closeModal}
-        />
+        <PhotoDetailsModal photo={selectedPhoto} closeModal={closeModal} />
       )}
     </div>
   );
