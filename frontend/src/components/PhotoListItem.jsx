@@ -1,16 +1,8 @@
-import React, { useState } from 'react';
-import PhotoFavButton from './PhotoFavButton';
+import React from 'react';
 import '../styles/PhotoListItem.scss';
 
-const PhotoListItem = ({ photo }) => {
+const PhotoListItem = ({ photo, isFavourite, toggleFavourite }) => {
   const { id, user, urls, location } = photo;
-
-  // Maintain unique favourite status for each photo
-  const [isFavourite, setIsFavourite] = useState(false);
-
-  const toggleFavourite = () => {
-    setIsFavourite(!isFavourite);
-  };
 
   return (
     <li className="photo-list__item">
@@ -21,7 +13,12 @@ const PhotoListItem = ({ photo }) => {
         <p className="photo-list__user-location">
           {location.city}, {location.country}
         </p>
-        <PhotoFavButton isFavourite={isFavourite} toggleFavourite={toggleFavourite} />
+        <button
+          className={`photo-list__fav-button ${isFavourite ? 'active' : ''}`}
+          onClick={() => toggleFavourite(id)}
+        >
+          ♥
+        </button>
       </div>
     </li>
   );
