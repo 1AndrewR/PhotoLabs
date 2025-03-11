@@ -1,18 +1,16 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import "../styles/PhotoFavButton.scss";
 
-const PhotoFavButton = () => {
-  const [isFavourite, setIsFavourite] = useState(false);
-
-  const handleClick = () => {
-    setIsFavourite(!isFavourite);
-    console.log(`Favourite status: ${!isFavourite}`); // Logs the updated favourite status
-  };
+const PhotoFavButton = ({ isFavourite, toggleFavourite }) => {
+  // Log state change
+  useEffect(() => {
+    console.log(`Favourite status: ${isFavourite}`);
+  }, [isFavourite]);
 
   return (
     <button
       className={`photo-fav-button ${isFavourite ? "photo-fav-button--active" : ""}`}
-      onClick={handleClick}
+      onClick={toggleFavourite}
       aria-label="Favourite"
     >
       ♥
