@@ -1,10 +1,10 @@
 import React from 'react';
-import TopicList from './components/TopicList';
+import TopNavigationBar from './components/TopNavigationBar';
 import './App.scss';
 
 const App = () => (
   <div className="App">
-    <TopicList />
+    <TopNavigationBar />
   </div>
 );
 
