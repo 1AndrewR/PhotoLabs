@@ -56,14 +56,7 @@ const photoData = [
 const App = () => (
   <div className="App">
     {photoData.map((photo) => (
-      <PhotoListItem
-        key={photo.id} // Unique key for React rendering
-        id={photo.id}
-        username={photo.user.username}
-        imageSource={photo.urls.regular}
-        profile={photo.user.profile}
-        location={`${photo.location.city}, ${photo.location.country}`}
-      />
+      <PhotoListItem key={photo.id} photo={photo} />
     ))}
   </div>
 );
