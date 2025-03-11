@@ -1,18 +1,22 @@
 import React, { useState } from 'react';
 import HomeRoute from './components/HomeRoute';
+import PhotoDetailsModal from './routes/PhotoDetailsModal';
 import photos from './mocks/photos';
 import topics from './mocks/topics';
 import './App.scss';
 
 const App = () => {
-  const [favourites, setFavourites] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedPhoto, setSelectedPhoto] = useState(null);
 
-  const toggleFavourite = (photoId) => {
-    setFavourites((prevFavourites) =>
-      prevFavourites.includes(photoId)
-        ? prevFavourites.filter((id) => id !== photoId)
-        : [...prevFavourites, photoId]
-    );
+  const openModal = (photo) => {
+    setSelectedPhoto(photo);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setSelectedPhoto(null);
+    setIsModalOpen(false);
   };
 
   return (
@@ -20,9 +24,14 @@ const App = () => {
       <HomeRoute
         photos={photos}
         topics={topics}
-        favourites={favourites}
-        toggleFavourite={toggleFavourite}
+        openModal={openModal}
       />
+      {isModalOpen && (
+        <PhotoDetailsModal
+          photo={selectedPhoto}
+          closeModal={closeModal}
+        />
+      )}
     </div>
   );
 };
