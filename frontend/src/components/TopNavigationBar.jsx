@@ -1,4 +1,5 @@
 import React from 'react';
+import TopicList from './TopicList';
 import '../styles/TopNavigationBar.scss';
 
 const TopNavigationBar = ({ topics }) => {
@@ -6,13 +7,7 @@ const TopNavigationBar = ({ topics }) => {
     <div className="top-nav-bar">
       <span className="top-nav-bar__logo">PhotoLabs</span>
       <nav className="top-nav-bar__topics">
-        <ul className="top-nav-bar__topic-list">
-          {topics.map((topic, index) => (
-            <li key={index} className="top-nav-bar__topic">
-              {topic}
-            </li>
-          ))}
-        </ul>
+        <TopicList topics={topics} />
       </nav>
       <div className="top-nav-bar__badge">
         <span className="top-nav-bar__fav-icon">♥</span>
