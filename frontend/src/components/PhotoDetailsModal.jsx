@@ -7,7 +7,7 @@ const PhotoDetailsModal = ({ photo, similarPhotos, closeModal }) => {
     <div className="photo-details-modal" onClick={closeModal}>
       <div
         className="photo-details-modal__content"
-        onClick={(e) => e.stopPropagation()} // Prevent closing modal when clicking inside content
+        onClick={(e) => e.stopPropagation()} // Prevents closing when clicking inside
       >
         <button
           className="photo-details-modal__close-button"
@@ -17,16 +17,20 @@ const PhotoDetailsModal = ({ photo, similarPhotos, closeModal }) => {
           &times;
         </button>
         <div className="photo-details-modal__header">
+          {/* Display larger photo */}
           <img
             src={photo.url}
             alt={`Photo by ${photo.username}`}
             className="photo-details-modal__image"
           />
-          <p>{photo.location.city}, {photo.location.country}</p>
+          {/* Display photographer and location details */}
+          <p>Photographer: {photo.username}</p>
+          <p>Location: {photo.location.city}, {photo.location.country}</p>
         </div>
         <div className="photo-details-modal__images">
           <h3>Similar Photos</h3>
-          <PhotoList photos={similarPhotos} openModal={() => {}} /> {/* Pass a no-op for modal */}
+          {/* Reuse PhotoList for similar photos */}
+          <PhotoList photos={similarPhotos} openModal={() => {}} /> {/* No-op for modal opening */}
         </div>
       </div>
     </div>

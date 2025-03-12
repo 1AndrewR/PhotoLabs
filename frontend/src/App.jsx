@@ -30,7 +30,7 @@ const App = () => {
       {isModalOpen && (
         <PhotoDetailsModal
           photo={selectedPhoto}
-          similarPhotos={photos.filter((p) => p.id !== selectedPhoto.id)} // Example: excluding the selected photo
+          similarPhotos={photos.filter((p) => p.id !== selectedPhoto.id)} // Exclude selected photo
           closeModal={closeModal}
         />
       )}
