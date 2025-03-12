@@ -9,7 +9,7 @@ const PhotoDetailsModal = ({ photo, similarPhotos, favourites, toggleFavourite, 
     <div className="photo-details-modal" onClick={closeModal}>
       <div
         className="photo-details-modal__content"
-        onClick={(e) => e.stopPropagation()} // Prevents modal close on inner content click
+        onClick={(e) => e.stopPropagation()} // Prevent closing modal when clicking on content
       >
         <button
           className="photo-details-modal__close-button"
