@@ -9,8 +9,9 @@ const PhotoDetailsModal = ({ photo, similarPhotos, favourites, toggleFavourite, 
     <div className="photo-details-modal" onClick={closeModal}>
       <div
         className="photo-details-modal__content"
-        onClick={(e) => e.stopPropagation()} // Prevent closing modal when clicking inside
+        onClick={(e) => e.stopPropagation()} // Prevent closing the modal when clicking inside
       >
+        {/* Close button */}
         <button
           className="photo-details-modal__close-button"
           onClick={closeModal}
@@ -18,16 +19,17 @@ const PhotoDetailsModal = ({ photo, similarPhotos, favourites, toggleFavourite, 
         >
           &times;
         </button>
+
+        {/* Main photo and details */}
         <div className="photo-details-modal__header">
-          {/* Display large photo */}
           <img
             src={photo.url}
             alt={`Photo by ${photo.username}`}
             className="photo-details-modal__image"
           />
-          {/* Photo details */}
           <p>Photographer: {photo.username}</p>
           <p>Location: {photo.location.city}, {photo.location.country}</p>
+
           {/* Favourite button */}
           <button
             className={`photo-details-modal__fav-button ${isFavourite ? 'active' : ''}`}
@@ -36,7 +38,8 @@ const PhotoDetailsModal = ({ photo, similarPhotos, favourites, toggleFavourite, 
             ♥
           </button>
         </div>
-        {/* Similar photos section */}
+
+        {/* Similar photos */}
         <div className="photo-details-modal__images">
           <h3>Similar Photos</h3>
           <PhotoList photos={similarPhotos} openModal={() => {}} />

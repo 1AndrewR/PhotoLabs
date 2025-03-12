@@ -6,10 +6,10 @@ const HomeRoute = ({ photos, favourites, toggleFavourite, openModal }) => {
   return (
     <div className="home-route">
       <PhotoList
-        photos={photos}
-        favourites={favourites}
-        toggleFavourite={toggleFavourite}
-        openModal={openModal}
+        photos={photos}                 // Pass the photos state
+        favourites={favourites}         // Pass the favourites state
+        toggleFavourite={toggleFavourite} // Pass the toggleFavourite function
+        openModal={openModal}           // Pass the openModal function
       />
     </div>
   );
