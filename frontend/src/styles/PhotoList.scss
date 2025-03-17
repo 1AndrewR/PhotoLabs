@@ -1,15 +1,14 @@
 .photo-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
   display: flex;
   flex-wrap: wrap;
-  gap: 16px;
+  justify-content: space-between;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
 }
 
-.photo-list__item {
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 10px;
-  background-color: #fff;
+.photo-list:after {
+  content: "";
+  flex: 0 1 30%;
+  margin: 5px;
 }

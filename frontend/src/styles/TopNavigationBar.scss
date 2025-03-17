@@ -1,45 +1,20 @@
 .top-nav-bar {
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
+  padding: 8px;
   align-items: center;
-  padding: 1rem;
-  background-color: #ffffff;
-  border-bottom: 1px solid #ddd;
+  -webkit-box-shadow: 0 4px 6px -6px #222;
+  -moz-box-shadow: 0 4px 6px -6px #222;
+  box-shadow: 0 4px 6px -6px #222;
+  height: 72px;
+}
 
-  &__logo {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #333;
-  }
-
-  &__topics {
-    flex: 1;
-    margin-left: 2rem;
-  }
-
-  &__badge {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-
-    &__fav-icon {
-      position: relative;
-      color: red;
-      font-size: 1.5rem;
-    }
-
-    &__notification-dot {
-      position: absolute;
-      top: -5px;
-      right: -5px;
-      width: 10px;
-      height: 10px;
-      background-color: red;
-      border-radius: 50%;
-    }
-
-    &__fav-count {
-      font-size: 1.2rem;
-    }
-  }
+.top-nav-bar--logo {
+  text-decoration: overline;
+  font-weight: 500;
+  font-size: 24px;
+  color: #111;
+  text-underline-position: auto;
+  margin-left: 24px;
 }

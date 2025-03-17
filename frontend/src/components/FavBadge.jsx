@@ -1,11 +1,19 @@
-import React from 'react';
-import '../styles/FavBadge.scss';
+import React from "react";
+import FavIcon from "./FavIcon";
+import HomeRoute from "../routes/HomeRoute";
+import "../styles/FavBadge.scss";
 
-const FavBadge = ({ isFavPhotoExist }) => (
-  <div className="fav-badge">
-    <span className="fav-badge__icon">♥</span>
-    {isFavPhotoExist && <span className="fav-badge__notification-dot"></span>}
-  </div>
-);
+export const FavBadge = ({ isFavPhotoExist }) => {
+  return (
+    <div className="fav-badge">
+      <FavIcon
+        width={20}
+        height={17}
+        fill="#C80000"
+        isFavourite={!!isFavPhotoExist}
+      />
+    </div>
+  );
+};
 
 export default FavBadge;

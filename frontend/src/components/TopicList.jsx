@@ -1,13 +1,22 @@
-import React from 'react';
-import TopicListItem from './TopicListItem';
-import '../styles/TopicList.scss';
+import React from "react";
+import "../styles/TopicListItem.scss";
+import "../styles/TopicList.scss";
+import TopicListItem from "./TopicListItem";
 
-const TopicList = ({ topics }) => (
-  <ul className="topic-list">
-    {topics.map((topic, index) => (
-      <TopicListItem key={index} topic={topic} />
-    ))}
-  </ul>
-);
+const TopicList = ({ handleTopicClick, topics }) => {
+  return (
+    <div className="top-nav-bar--topic-list">
+      {topics.map((topic, index) => (
+        <TopicListItem
+          key={topic.id + "-" + index}
+          id={topic.id}
+          label={topic.title}
+          link={`/topics/${topic.slug}`}
+          handleTopicClick={handleTopicClick}
+        />
+      ))}
+    </div>
+  );
+};
 
 export default TopicList;

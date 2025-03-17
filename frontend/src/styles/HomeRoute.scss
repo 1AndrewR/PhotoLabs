@@ -1,12 +1,4 @@
 .home-route {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-
-  &__photos {
-    flex: 1;
-    overflow-y: auto;
-    padding: 1rem;
-    background-color: #f9f9f9;
-  }
+  max-width: 1200px;
+  margin: auto;
 }

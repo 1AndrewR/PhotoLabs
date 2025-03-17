@@ -1,11 +1,20 @@
-import React from 'react';
-import '../styles/TopicListItem.scss';
+import React from "react";
+import "../styles/TopicListItem.scss";
 
-const TopicListItem = ({ topic }) => {
+const TopicListItem = (props) => {
+  const { id, label, link, handleTopicClick } = props;
+
+  const handleTopClick = (event) => {
+    event.preventDefault();
+    handleTopicClick(id);
+  };
+
   return (
-    <li className="topic-list__item">
-      {topic}
-    </li>
+    <div className="topic-list--item">
+      <a key={id} id={id} label={label} href={link} onClick={handleTopClick}>
+        <span>{label}</span>
+      </a>
+    </div>
   );
 };
 

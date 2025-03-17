@@ -1,20 +1,46 @@
-import React from 'react';
-import '../styles/PhotoListItem.scss';
+import React from "react";
+import PhotoFavButton from "./PhotoFavButton";
+import "../styles/PhotoListItem.scss";
+import UserProfile from "./UserProfile";
 
-const PhotoListItem = ({ photo, openModal }) => {
+const PhotoListItem = ({
+  openModal,
+  photo,
+  isFavourite,
+  addToFavourites,
+  removeFromFavourites,
+}) => {
   const { id, user, urls, location } = photo;
 
+  const handleOpenModal = () => {
+    const parentModal = document.querySelector(".photo-details-modal");
+    if (!parentModal) {
+      openModal(photo);
+    }
+  };
   return (
-    <li className="photo-list__item" onClick={() => openModal(photo)}>
-      <img src={urls.regular} alt={`Photo ${id}`} className="photo-list__image" />
-      <div className="photo-list__user-details">
-        <img src={user.profile} alt={`${user.username}'s profile`} className="photo-list__user-profile" />
-        <p className="photo-list__user-info">{user.username}</p>
-        <p className="photo-list__user-location">
-          {location.city}, {location.country}
-        </p>
-      </div>
-    </li>
+    <div className="photo-list--item">
+      <article>
+        <PhotoFavButton
+          photoId={id}
+          isFavourite={isFavourite}
+          addToFavourites={addToFavourites}
+          removeFromFavourites={removeFromFavourites}
+          photo={photo}
+        />
+        <img
+          alt={`Photo ${id}`}
+          src={urls.regular}
+          key={id + 1}
+          id={id}
+          className="photo-list--image"
+          onClick={handleOpenModal}
+        />
+        <div>
+          <UserProfile photo={photo} id={id} user={user} location={location} />
+        </div>
+      </article>
+    </div>
   );
 };
 

@@ -1,48 +1,85 @@
-import React, { useState } from 'react';
-import HomeRoute from './components/HomeRoute';
-import PhotoDetailsModal from './routes/PhotoDetailsModal';
-import photos from './mocks/photos';
-import './App.scss';
+import React, { useEffect, useState } from "react";
+import "./App.scss";
+import "./styles/HomeRoute.scss";
+import HomeRoute from "./routes/HomeRoute";
+import useApplicationData from "./hooks/useApplicationData";
+
+import PhotoDetailsModal from "./routes/PhotoDetailsModal";
 
 const App = () => {
-  const [favourites, setFavourites] = useState([]);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedPhoto, setSelectedPhoto] = useState(null);
+  const [photos, setPhotos] = useState([]);
+  const [topics, setTopics] = useState([]);
+  const { similarPhotos: applicationSimilarPhotos } = useApplicationData({
+    photos,
+    topics,
+  });
 
-  const toggleFavourite = (photoId) => {
-    setFavourites((prevFavourites) =>
-      prevFavourites.includes(photoId)
-        ? prevFavourites.filter((id) => id !== photoId) // Remove photo from favourites
-        : [...prevFavourites, photoId] // Add photo to favourites
-    );
-    console.log('Favourites updated:', favourites);
+  const handleTopicClick = (topicId) => {
+    if (topicId) {
+      fetch(`http://localhost:8001/api/topics/photos/${topicId}`)
+        .then((response) => response.json())
+        .then((data) => {
+          setPhotos(data);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
   };
 
-  const openModal = (photo) => {
-    setSelectedPhoto(photo);
-    setIsModalOpen(true);
-  };
+  useEffect(() => {
+    fetch("http://localhost:8001/api/photos")
+      .then((response) => response.json())
+      .then((data) => {
+        setPhotos(data);
+      })
+      .catch((error) => console.error("Error fetching photos:", error));
+  }, []);
+  useEffect(() => {
+    fetch("/api/topics")
+      .then((response) => response.json())
+      .then((data) => setTopics(data))
+      .catch((error) => console.error("Error fetching topics:", error));
+  }, []);
 
-  const closeModal = () => {
-    setSelectedPhoto(null);
-    setIsModalOpen(false);
-  };
+  useEffect(() => {
+    handleTopicClick();
+  }, []);
+
+  const {
+    isModalOpen,
+    selectedPhoto,
+    favouritePhotos,
+    openModal,
+    closeModal,
+    isFavourite,
+    addToFavourites,
+    removeFromFavourites,
+    similarPhotos,
+  } = useApplicationData({ photos, topics });
 
   return (
     <div className="App">
       <HomeRoute
+        handleTopicClick={handleTopicClick}
         photos={photos}
-        favourites={favourites}
-        toggleFavourite={toggleFavourite}
+        topics={topics}
         openModal={openModal}
+        closeModal={closeModal}
+        isFavourite={isFavourite}
+        addToFavourites={addToFavourites}
+        removeFromFavourites={removeFromFavourites}
+        favouritePhotos={favouritePhotos}
       />
       {isModalOpen && (
         <PhotoDetailsModal
-          photo={selectedPhoto}
-          similarPhotos={photos.filter((p) => p.id !== selectedPhoto?.id)} // Exclude the selected photo
-          favourites={favourites}
-          toggleFavourite={toggleFavourite}
+          photos={photos}
+          selectedPhoto={selectedPhoto}
           closeModal={closeModal}
+          isFavourite={isFavourite}
+          addToFavourites={addToFavourites}
+          removeFromFavourites={removeFromFavourites}
+          favouritePhotos={favouritePhotos}
         />
       )}
     </div>
@@ -50,5 +87,3 @@ const App = () => {
 };
 
 export default App;
-
-

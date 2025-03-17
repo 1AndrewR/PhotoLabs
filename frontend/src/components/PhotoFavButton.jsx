@@ -1,20 +1,30 @@
-import React, { useEffect } from 'react';
+import React from "react";
+import FavBadge from "./FavBadge";
+import { FavIcon } from "./FavIcon";
 import "../styles/PhotoFavButton.scss";
 
-const PhotoFavButton = ({ isFavourite, toggleFavourite }) => {
-  // Log state change
-  useEffect(() => {
-    console.log(`Favourite status: ${isFavourite}`);
-  }, [isFavourite]);
+const PhotoFavButton = ({
+  isFavourite,
+  addToFavourites,
+  removeFromFavourites,
+  photo,
+}) => {
+  const handleFavIconClick = () => {
+    if (isFavourite) {
+      removeFromFavourites(photo);
+    } else {
+      addToFavourites(photo);
+    }
+  };
 
   return (
-    <button
-      className={`photo-fav-button ${isFavourite ? "photo-fav-button--active" : ""}`}
-      onClick={toggleFavourite}
-      aria-label="Favourite"
-    >
-      ♥
-    </button>
+    <div className="photo-list--fav-icon" onClick={handleFavIconClick}>
+      {isFavourite ? (
+        <FavBadge className="photo-list--fav-icon-svg" />
+      ) : (
+        <FavIcon className="photo-list--fav-icon-svg" />
+      )}
+    </div>
   );
 };
 
