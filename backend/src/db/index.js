@@ -1,11 +1,7 @@
 const pg = require("pg");
-
+console.log(process.env.DATABASE_URL);
 const client = new pg.Client({
-  host: process.env.PGHOST,
-  name: process.env.PGDATABASE,
-  user: process.env.PGUSER,
-  password: process.env.PGPASSWORD,
-  port: process.env.PGPORT,
+  connectionString: process.env.DATABASE_URL || "",
   ssl: process.env.DATABASE_URL ? { rejectUnauthorized: false } : false
 });
 

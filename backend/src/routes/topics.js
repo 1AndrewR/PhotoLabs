@@ -1,4 +1,6 @@
 const router = require("express").Router();
+const topicsMock = require("../mocks/topics.json");
+const photosMock = require("../mocks/photos.json");
 
 module.exports = db => {
   router.get("/topics", (request, response) => {
@@ -13,7 +15,7 @@ module.exports = db => {
     });
   });
   
-  router.get("/topics/:id/photos", (request, response) => {
+  router.get("/topics/photos/:id", (request, response) => {
     const protocol = request.protocol;
     const host = request.hostname;
     const port = process.env.PORT || 8001;
