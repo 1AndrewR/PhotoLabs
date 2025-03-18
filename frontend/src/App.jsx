@@ -1,52 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "./App.scss";
 import "./styles/HomeRoute.scss";
 import HomeRoute from "./routes/HomeRoute";
 import useApplicationData from "./hooks/useApplicationData";
-
 import PhotoDetailsModal from "./routes/PhotoDetailsModal";
 
 const App = () => {
-  const [photos, setPhotos] = useState([]);
-  const [topics, setTopics] = useState([]);
-  const { similarPhotos: applicationSimilarPhotos } = useApplicationData({
-    photos,
-    topics,
-  });
-
-  const handleTopicClick = (topicId) => {
-    if (topicId) {
-      fetch(`http://localhost:8001/api/topics/photos/${topicId}`)
-        .then((response) => response.json())
-        .then((data) => {
-          setPhotos(data);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    }
-  };
-
-  useEffect(() => {
-    fetch("http://localhost:8001/api/photos")
-      .then((response) => response.json())
-      .then((data) => {
-        setPhotos(data);
-      })
-      .catch((error) => console.error("Error fetching photos:", error));
-  }, []);
-  useEffect(() => {
-    fetch("/api/topics")
-      .then((response) => response.json())
-      .then((data) => setTopics(data))
-      .catch((error) => console.error("Error fetching topics:", error));
-  }, []);
-
-  useEffect(() => {
-    handleTopicClick();
-  }, []);
-
   const {
+    topics,
+    photos,
     isModalOpen,
     selectedPhoto,
     favouritePhotos,
@@ -55,8 +17,16 @@ const App = () => {
     isFavourite,
     addToFavourites,
     removeFromFavourites,
-    similarPhotos,
-  } = useApplicationData({ photos, topics });
+  } = useApplicationData();
+
+  const handleTopicClick = (topicId) => {
+    if (topicId) {
+      fetch(`http://localhost:8001/api/topics/photos/${topicId}`)
+        .then((response) => response.json())
+        .then((data) => console.log("Update photos after topic selection:", data))
+        .catch((error) => console.error(error));
+    }
+  };
 
   return (
     <div className="App">

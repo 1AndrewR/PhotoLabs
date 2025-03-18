@@ -1,6 +1,7 @@
-import React, { useReducer, useEffect, useState } from "react";
+import React, { useReducer, useEffect } from "react";
 
 const SET_TOPICS = "SET_TOPICS";
+const SET_PHOTOS = "SET_PHOTOS";
 const OPEN_MODAL = "OPEN_MODAL";
 const CLOSE_MODAL = "CLOSE_MODAL";
 const SET_SIMILAR_PHOTOS = "SET_SIMILAR_PHOTOS";
@@ -12,60 +13,52 @@ const initialState = {
   selectedPhoto: null,
   similarPhotos: [],
   favouritePhotos: [],
-  topicsCategory: { topics: [] },
+  topics: [],
+  photos: [],
 };
 
 function reducer(state, action) {
   switch (action.type) {
     case SET_TOPICS:
-      return {
-        ...state,
-        topicsCategory: action.payload,
-      };
+      return { ...state, topics: action.payload };
+    case SET_PHOTOS:
+      return { ...state, photos: action.payload };
     case OPEN_MODAL:
-      return {
-        ...state,
-        isModalOpen: true,
-        selectedPhoto: action.payload,
-      };
+      return { ...state, isModalOpen: true, selectedPhoto: action.payload };
     case CLOSE_MODAL:
-      return {
-        ...state,
-        isModalOpen: false,
-        selectedPhoto: null,
-        similarPhotos: [],
-      };
+      return { ...state, isModalOpen: false, selectedPhoto: null, similarPhotos: [] };
     case SET_SIMILAR_PHOTOS:
-      return {
-        ...state,
-        similarPhotos: action.payload,
-      };
+      return { ...state, similarPhotos: action.payload };
     case ADD_TO_FAVOURITES:
-      return {
-        ...state,
-        favouritePhotos: [...state.favouritePhotos, action.payload],
-      };
+      return { ...state, favouritePhotos: [...state.favouritePhotos, action.payload] };
     case REMOVE_FROM_FAVOURITES:
       return {
         ...state,
-        favouritePhotos: state.favouritePhotos.filter(
-          (fav) => fav.id !== action.payload.id
-        ),
+        favouritePhotos: state.favouritePhotos.filter((fav) => fav.id !== action.payload.id),
       };
     default:
       throw new Error(`Unsupported action type: ${action.type}`);
   }
 }
 
-export default function useApplicationData({ photos, topics }) {
+export default function useApplicationData() {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const [selectedPhoto, setSelectedPhoto] = useState(null);
 
-  const setTopics = (topics) => {
-    dispatch({ type: SET_TOPICS, payload: topics });
-  };
+  useEffect(() => {
+    // Fetch topics
+    fetch("/api/topics")
+      .then((response) => response.json())
+      .then((data) => dispatch({ type: SET_TOPICS, payload: data }))
+      .catch((error) => console.error("Error fetching topics:", error));
 
-  const openModal = async (photo) => {
+    // Fetch photos
+    fetch("http://localhost:8001/api/photos")
+      .then((response) => response.json())
+      .then((data) => dispatch({ type: SET_PHOTOS, payload: data }))
+      .catch((error) => console.error("Error fetching photos:", error));
+  }, []);
+
+  const openModal = (photo) => {
     dispatch({ type: OPEN_MODAL, payload: photo });
   };
 
@@ -73,12 +66,7 @@ export default function useApplicationData({ photos, topics }) {
     dispatch({ type: CLOSE_MODAL });
   };
 
-  const isFavourite = (photo) => {
-    if (!photo) {
-      return false;
-    }
-    return state.favouritePhotos.some((fav) => fav.id === photo.id);
-  };
+  const isFavourite = (photo) => state.favouritePhotos.some((fav) => fav.id === photo.id);
 
   const addToFavourites = (photo) => {
     dispatch({ type: ADD_TO_FAVOURITES, payload: photo });
@@ -89,10 +77,7 @@ export default function useApplicationData({ photos, topics }) {
   };
 
   return {
-    setTopics,
-    isModalOpen: state.isModalOpen,
-    selectedPhoto: state.selectedPhoto,
-    favouritePhotos: state.favouritePhotos,
+    ...state,
     openModal,
     closeModal,
     isFavourite,
