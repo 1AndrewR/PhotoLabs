@@ -8,4 +8,4 @@ The PhotoLabs project for the Web Development React course programming.
 
 [Frontend Setup Instructions](/frontend/)
 
-# TEST
+# TEST 1
