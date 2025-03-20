@@ -4,17 +4,29 @@
   justify-content: space-between;
   padding: 8px;
   align-items: center;
-  -webkit-box-shadow: 0 4px 6px -6px #222;
-  -moz-box-shadow: 0 4px 6px -6px #222;
   box-shadow: 0 4px 6px -6px #222;
   height: 72px;
+  color: var(--text-color); /* Dynamically adjust text color */
 }
 
 .top-nav-bar--logo {
   text-decoration: overline;
   font-weight: 500;
   font-size: 24px;
-  color: #111;
-  text-underline-position: auto;
+  color: var(--text-color); /* Dynamically adjust text color */
   margin-left: 24px;
+}
+
+.sidebar {
+  color: var(--text-color); /* Adjust "No Favourite Photos" text color */
+}
+
+.favourite-text {
+  color: var(--text-color); /* Explicitly target "Favourite Photo" text */
+}
+
+.top-nav-bar--actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
 }

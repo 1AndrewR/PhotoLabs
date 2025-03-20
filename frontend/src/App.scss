@@ -36,3 +36,21 @@
     transform: rotate(360deg);
   }
 }
+
+/* Global Variables for Light/Dark Mode */
+:root {
+  --background-color: #ffffff;
+  --text-color: #000000;
+}
+
+[data-theme="dark"] {
+  --background-color: #282c34;
+  --text-color: #ffffff;
+}
+
+/* Applying Global Styles for Light/Dark Modes */
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
+}

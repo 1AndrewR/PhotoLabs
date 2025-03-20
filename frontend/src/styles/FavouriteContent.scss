@@ -5,12 +5,10 @@ div.sidebar {
   align-items: center;
 }
 
-
 .favourite-content-list {
   display: flex;
-  
-  margin-right:20px;
-  justify-content:center;
+  margin-right: 20px;
+  justify-content: center;
   padding: 8px;
   align-items: center;
   -webkit-box-shadow: 0 4px 6px -6px #222;
@@ -22,17 +20,17 @@ div.sidebar {
 .favourite-content--item {
   line-height: 24px;
   margin-left: 24px;
-}
 
-.favourite-content--item span {
-  font-size: 16px;
-  text-decoration: none;
-  font-weight: 500;
-  color: #2b2b2b;
-  
+  span {
+    font-size: 16px;
+    text-decoration: none;
+    font-weight: 500;
+    color: var(--text-color); /* Dynamically adjust text color */
+    transition: color 0.3s;
 
-  &:hover {
-    text-decoration: underline;
-    color: #111;
+    &:hover {
+      text-decoration: underline;
+      color: var(--text-color); /* Ensure hover matches theme */
+    }
   }
 }

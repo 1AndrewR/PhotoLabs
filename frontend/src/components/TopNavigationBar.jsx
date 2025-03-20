@@ -3,6 +3,8 @@ import "../styles/TopNavigationBar.scss";
 import TopicList from "./TopicList";
 import FavIcon from "./FavIcon";
 import FavouriteContent from "./FavouriteContent";
+import LightDarkButton from "./LightDarkButton"; // Import the LightDarkButton component
+
 const TopNavigation = ({
   favouriteCount,
   favouritePhotos,
@@ -12,6 +14,7 @@ const TopNavigation = ({
 }) => {
   const displayAlert = favouriteCount > 0;
   const fill = "#C80000";
+
   return (
     <div className="top-nav-bar">
       <span className="top-nav-bar--logo">PhotoLabs</span>
@@ -25,8 +28,9 @@ const TopNavigation = ({
           favouriteCount={favouriteCount}
         />
       </div>
-      <div className="top-nav-bar--badge">
-        {<FavIcon fill={fill} displayAlert={displayAlert} />}
+      <div className="top-nav-bar--actions">
+        <FavIcon fill={fill} displayAlert={displayAlert} />
+        <LightDarkButton /> {/* Use the modular component */}
       </div>
     </div>
   );

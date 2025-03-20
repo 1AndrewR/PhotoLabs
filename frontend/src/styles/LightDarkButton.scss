@@ -1,0 +1,14 @@
+.light-dark-button {
+  padding: 8px 12px;
+  background-color: #61dafb;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  color: white;
+}
+
+.light-dark-button:hover {
+  background-color: #282c34;
+  color: #61dafb;
+}
