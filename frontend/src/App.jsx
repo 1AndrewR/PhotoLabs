@@ -17,14 +17,18 @@ const App = () => {
     isFavourite,
     addToFavourites,
     removeFromFavourites,
+    setPhotos, // Added setPhotos from useApplicationData
   } = useApplicationData();
 
   const handleTopicClick = (topicId) => {
     if (topicId) {
-      fetch(`http://localhost:8001/api/topics/photos/${topicId}`)
+      fetch(`/api/topics/photos/${topicId}`)
         .then((response) => response.json())
-        .then((data) => console.log("Update photos after topic selection:", data))
-        .catch((error) => console.error(error));
+        .then((data) => {
+          console.log("Fetched photos for topic:", data);
+          setPhotos(data); // Update state with fetched photos
+        })
+        .catch((error) => console.error("Error fetching photos:", error));
     }
   };
 

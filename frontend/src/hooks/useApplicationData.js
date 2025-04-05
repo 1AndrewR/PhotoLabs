@@ -45,18 +45,20 @@ export default function useApplicationData() {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
-    // Fetch topics
     fetch("/api/topics")
       .then((response) => response.json())
       .then((data) => dispatch({ type: SET_TOPICS, payload: data }))
       .catch((error) => console.error("Error fetching topics:", error));
 
-    // Fetch photos
-    fetch("http://localhost:8001/api/photos")
+    fetch("/api/photos")
       .then((response) => response.json())
       .then((data) => dispatch({ type: SET_PHOTOS, payload: data }))
       .catch((error) => console.error("Error fetching photos:", error));
   }, []);
+
+  const setPhotos = (photos) => {
+    dispatch({ type: SET_PHOTOS, payload: photos });
+  };
 
   const openModal = (photo) => {
     dispatch({ type: OPEN_MODAL, payload: photo });
@@ -83,5 +85,6 @@ export default function useApplicationData() {
     isFavourite,
     addToFavourites,
     removeFromFavourites,
+    setPhotos, // Added setPhotos function
   };
 }

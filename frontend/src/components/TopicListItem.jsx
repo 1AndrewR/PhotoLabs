@@ -6,6 +6,7 @@ const TopicListItem = (props) => {
 
   const handleTopClick = (event) => {
     event.preventDefault();
+    console.log(`Topic clicked with ID: ${id}`);
     handleTopicClick(id);
   };
 
